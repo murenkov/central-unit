@@ -14,7 +14,7 @@ module adder(
 );
 
     assign D = S[3] & a & b | S[2] & a & ~b;
-    assign F = a | S[1] & ~b | S[0];
+    assign F = a | S[1] & ~b | S[0] & b;
     assign R = (S[3] & a & b | S[2] & a & ~b) ^ (a | S[1] & ~b | S[0] & b) ^ M & Pin; 
     assign Pout = D | F & Pin;
 
