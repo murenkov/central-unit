@@ -9,7 +9,8 @@ module parallel_ALU(
     input Pin,
 
     output [3:0] R,
-    output [3:0] P
+    output [3:0] P,
+    output Pout
 );
     wire [3:0] D, F;
 
@@ -63,6 +64,8 @@ module parallel_ALU(
         .F    (F[3]),
         .R    (R[3])
     );
+    
+    assign Pout = P[3];
 
 endmodule
 
