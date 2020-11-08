@@ -4,4 +4,4 @@ waveform:
 	gtkwave "$(MODULE).vcd";
 
 clean:
-	rm *.vvp *.vcd
+	rm *.vvp *.vcd *.gtkw
