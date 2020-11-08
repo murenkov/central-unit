@@ -134,7 +134,7 @@ module RALU_testbench();
         ISR = 0;
         ISL = 0;
         Pin = 0;
-        v = 4'b1001;
+        v = 4'b1000;
         adr = 3;
         wr = 1;
         DataIn = 2;
@@ -151,7 +151,7 @@ module RALU_testbench();
         v = 4'b1001;
         adr = 0;
         wr = 0;
-        DataIn = 2;
+        DataIn = 0;
         #PERIOD;
 
         // 8
@@ -162,10 +162,10 @@ module RALU_testbench();
         ISR = 0;
         ISL = 0;
         Pin = 0;
-        v = 4'b1111;
+        v = 4'b1110;
         adr = 2;
         wr = 0;
-        DataIn = 2;
+        DataIn = 0;
         #PERIOD;
 
         // 9
@@ -176,38 +176,38 @@ module RALU_testbench();
         ISR = 0;
         ISL = 0;
         Pin = 1;
-        v = 4'b1111;
+        v = 4'b1000;
         adr = 0;
         wr = 1;
-        DataIn = 2;
+        DataIn = 0;
         #PERIOD;
 
         // 10
         reset = 0;
-        S = 4'b1001;
-        M = 1;
+        S = 4'b0000;
+        M = 0;
         A = 0;
         ISR = 0;
         ISL = 0;
         Pin = 1;
-        v = 4'b1111;
+        v = 4'b1001;
         adr = 1;
         wr = 0;
-        DataIn = 2;
+        DataIn = 0;
         #PERIOD;
 
         // 11
         reset = 0;
-        S = 4'b1001;
-        M = 1;
+        S = 4'b0000;
+        M = 0;
         A = 0;
         ISR = 0;
         ISL = 0;
         Pin = 1;
-        v = 4'b1111;
+        v = 4'b1110;
         adr = 3;
         wr = 0;
-        DataIn = 2;
+        DataIn = 0;
         #PERIOD;
 
         // 12
@@ -218,10 +218,10 @@ module RALU_testbench();
         ISR = 0;
         ISL = 0;
         Pin = 1;
-        v = 4'b1111;
+        v = 4'b1000;
         adr = 1;
         wr = 1;
-        DataIn = 2;
+        DataIn = 0;
         #PERIOD;
 
         /*
