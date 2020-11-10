@@ -16,7 +16,7 @@ module ControlUnit(
     assign command = ROM[program_counter];
     assign control_bus = command[16:0];
 
-    always @(posedge clock or posedge reset) begin
+    always @(posedge clock or posedge reset)
         if (reset)
             program_counter <= 0;
         else case (command[19:17])
@@ -44,8 +44,6 @@ module ControlUnit(
             3'b111:
                 program_counter <= command[6:0];
         endcase
-    end
-
 
 endmodule
 

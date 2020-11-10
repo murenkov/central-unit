@@ -43,7 +43,7 @@ module CommandControlledDevice(
     assign port_write = control_bus[3];
     assign port_id = control_bus[6:4];
 
-    always @(posedge clock or posedge reset) begin
+    always @(posedge clock or posedge reset)
         if (!reset) begin
             carry_flag <= 0;
             zero_flag <= 0;
@@ -52,7 +52,6 @@ module CommandControlledDevice(
             carry_flag <= Pout;
             zero_flag <= ~(data_out[3] | data_out[2] | data_out[1] | data_out[0]);
         end
-    end
 
 endmodule
 
