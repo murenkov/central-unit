@@ -77,7 +77,7 @@ module RALU_testbench();
         // 2nd clock signal
         // Read data from data_in to register A
         reset = 0;
-        DataIn = 4;
+        DataIn = 3;
         S = 4'b0000;
         M = 0;
         Pin = 0;
@@ -107,7 +107,7 @@ module RALU_testbench();
         // 4th clock signal
         // Read data from data_in to register A
         reset = 0;
-        DataIn = 0;
+        DataIn = 12;
         S = 4'b0000;
         M = 0;
         Pin = 0;
@@ -255,7 +255,7 @@ module RALU_testbench();
         #PERIOD;
         
         // 14th clock signal
-        // Multiply data from registers A and B
+        // Bitwise and of data from registers A and B
         reset = 0;
         DataIn = 0;
         S = 4'b0100;
