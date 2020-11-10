@@ -8,16 +8,19 @@ module RALU_testbench();
 
     reg        clock;
     reg        reset;
+
     reg  [3:0] DataIn;
+
     reg  [3:0] S;
     reg        M;
     reg        Pin;
-    reg        A;
-    reg  [3:0] v;
-    reg        wr;
-    reg  [2:0] adr;
     reg        ISR;
     reg        ISL;
+    reg        A;
+    reg        wr;
+    reg  [2:0] adr;
+    reg  [3:0] v;
+
     wire       OSR;
     wire       OSL;
     wire       Pout;
@@ -56,244 +59,218 @@ module RALU_testbench();
 
         clock = 0;
 
-        // 1
+        // 1st clock signal
+        // Reset
         reset = 1;
+        DataIn = 0;
         S = 4'b0000;
         M = 0;
-        A = 1;
+        Pin = 0;
         ISR = 0;
         ISL = 0;
-        Pin = 0;
-        v = 4'b1001;
-        adr = 0;
+        A = 0;
         wr = 0;
+        adr = 0;
+        v = 4'b0000;
+        #PERIOD;
+        
+        // 2nd clock signal
+        // Read data from data_in to register A
+        reset = 0;
         DataIn = 4;
-        #PERIOD;
-
-        // 2
-        reset = 0;
         S = 4'b0000;
         M = 0;
-        A = 1;
+        Pin = 0;
         ISR = 0;
         ISL = 0;
-        Pin = 0;
-        v = 4'b1001;
-        adr = 0;
+        A = 1;
         wr = 0;
-        DataIn = 4;
-        #PERIOD;
-
-        // 3
-        reset = 0;
-        S = 4'b0000;
-        M = 0;
-        A = 1;
-        ISR = 0;
-        ISL = 0;
-        Pin = 0;
-        v = 4'b1001;
         adr = 0;
-        wr = 1;
-        DataIn = 6;
+        v = 4'b0001;
         #PERIOD;
-
-        // 4
+        
+        // 3rd clock signal
+        // Send data from registr A to GPRB[0]
         reset = 0;
+        DataIn = 0;
         S = 4'b0000;
         M = 0;
-        A = 1;
+        Pin = 0;
         ISR = 0;
         ISL = 0;
+        A = 0;
+        wr = 1;
+        adr = 0;
+        v = 4'b0000;
+        #PERIOD;
+        
+        // 4th clock signal
+        // Read data from data_in to register A
+        reset = 0;
+        DataIn = 0;
+        S = 4'b0000;
+        M = 0;
         Pin = 0;
-        v = 4'b1001;
+        ISR = 0;
+        ISL = 0;
+        A = 1;
+        wr = 0;
+        adr = 0;
+        v = 4'b0001;
+        #PERIOD;
+        
+        // 5th clock signal
+        // Send data from register A to GPRB[1]
+        reset = 0;
+        DataIn = 0;
+        S = 4'b0000;
+        M = 0;
+        Pin = 0;
+        ISR = 0;
+        ISL = 0;
+        A = 0;
+        wr = 1;
         adr = 1;
-        wr = 1;
-        DataIn = 3;
+        v = 4'b0000;
         #PERIOD;
-
-        // 5
+        
+        // 6th clock signal
+        // Send data from GPRB[0] to register A
         reset = 0;
+        DataIn = 0;
         S = 4'b0000;
         M = 0;
-        A = 1;
+        Pin = 0;
         ISR = 0;
         ISL = 0;
-        Pin = 0;
-        v = 4'b1001;
-        adr = 2;
-        wr = 1;
-        DataIn = 2;
-        #PERIOD;
-
-        // 6
-        reset = 0;
-        S = 4'b0000;
-        M = 0;
-        A = 1;
-        ISR = 0;
-        ISL = 0;
-        Pin = 0;
-        v = 4'b1000;
-        adr = 3;
-        wr = 1;
-        DataIn = 2;
-        #PERIOD;
-
-        // 7
-        reset = 0;
-        S = 4'b0000;
-        M = 0;
         A = 0;
-        ISR = 0;
-        ISL = 0;
-        Pin = 0;
-        v = 4'b1001;
+        wr = 0;
         adr = 0;
-        wr = 0;
-        DataIn = 0;
+        v = 4'b0001;
         #PERIOD;
-
-        // 8
+        
+        // 7th clock signal
+        // Send data from GPRB[1] to register B
         reset = 0;
+        DataIn = 0;
         S = 4'b0000;
         M = 0;
-        A = 0;
+        Pin = 0;
         ISR = 0;
         ISL = 0;
-        Pin = 0;
-        v = 4'b1110;
-        adr = 2;
+        A = 0;
         wr = 0;
-        DataIn = 0;
+        adr = 1;
+        v = 4'b0110;
         #PERIOD;
-
-        // 9
+        
+        // 8th clock signal
+        // Get sum of data from registers A and B, then send result to GPRB[1]
         reset = 0;
+        DataIn = 0;
         S = 4'b1001;
         M = 1;
-        A = 0;
+        Pin = 0;
         ISR = 0;
         ISL = 0;
-        Pin = 1;
-        v = 4'b1000;
-        adr = 0;
+        A = 0;
         wr = 1;
-        DataIn = 0;
+        adr = 1;
+        v = 4'b0000;
         #PERIOD;
-
-        // 10
+        
+        // 9th clock signal
+        // Send data from GPRB[0] to register B
         reset = 0;
+        DataIn = 0;
         S = 4'b0000;
         M = 0;
-        A = 0;
+        Pin = 0;
         ISR = 0;
         ISL = 0;
-        Pin = 1;
-        v = 4'b1001;
-        adr = 1;
+        A = 0;
         wr = 0;
-        DataIn = 0;
+        adr = 0;
+        v = 4'b0110;
         #PERIOD;
-
-        // 11
+        
+        // 10th clock signal
+        // Shift to left data in register B
         reset = 0;
+        DataIn = 0;
+        S = 4'b0101;
+        M = 0;
+        Pin = 0;
+        ISR = 0;
+        ISL = 0;
+        A = 0;
+        wr = 0;
+        adr = 0;
+        v = 4'b0010;
+        #PERIOD;
+        
+        // 11th clock signal
+        // Shift to left data in register B
+        reset = 0;
+        DataIn = 0;
+        S = 4'b0101;
+        M = 0;
+        Pin = 0;
+        ISR = 0;
+        ISL = 0;
+        A = 0;
+        wr = 0;
+        adr = 0;
+        v = 4'b0010;
+        #PERIOD;
+        
+        // 12th clock signal
+        // Shift to left data in register B and send result to GPRB[0]
+        reset = 0;
+        DataIn = 0;
+        S = 4'b0101;
+        M = 0;
+        Pin = 0;
+        ISR = 0;
+        ISL = 0;
+        A = 0;
+        wr = 1;
+        adr = 0;
+        v = 4'b0010;
+        #PERIOD;
+        
+        // 13th clock signal
+        // Send data from GPRB[1] to register A
+        reset = 0;
+        DataIn = 0;
         S = 4'b0000;
         M = 0;
-        A = 0;
+        Pin = 0;
         ISR = 0;
         ISL = 0;
-        Pin = 1;
-        v = 4'b1110;
-        adr = 3;
+        A = 0;
         wr = 0;
-        DataIn = 0;
+        adr = 1;
+        v = 4'b0001;
         #PERIOD;
-
-        // 12
+        
+        // 14th clock signal
+        // Multiply data from registers A and B
         reset = 0;
-        S = 4'b1001;
-        M = 1;
-        A = 0;
+        DataIn = 0;
+        S = 4'b0100;
+        M = 0;
+        Pin = 0;
         ISR = 0;
         ISL = 0;
-        Pin = 1;
-        v = 4'b1000;
-        adr = 1;
-        wr = 1;
-        DataIn = 0;
-        #PERIOD;
-
-        /*
-        DataIn = 4;
-        v[0] = 1;
-        S = 4'b0000;
-        #PERIOD;
-
-        DataIn = 6;
-        A = 1;
-        v[0] = 1;
-        wr = 1;
+        A = 0;
+        wr = 0;
         adr = 0;
+        v = 4'b0000;
         #PERIOD;
-
-        DataIn = 3;
-        A = 1;
-        v[0] = 1;
-        wr = 1;
-        adr = 1;
-        #PERIOD;
-
-        DataIn = 2;
-        A = 1;
-        v[0] = 1;
-        wr = 1;
-        adr = 2;
-        #PERIOD;
-
-        wr = 1;
-        adr = 3;
-        #PERIOD;
-
-        A = 0;
-        v[0] = 1;
-        adr = 0;
-        wr = 0;
-        #PERIOD;
-
-        A = 0;
-        v[2:1] = 2'b11;
-        adr = 2;
-        wr = 0;
-        #PERIOD;
-
-        S = 4'b1001;
-        M = 1;
-        Pin = 1;
-        adr = 0;
-        wr = 1;
-        #PERIOD;
-
-        A = 0;
-        v[0] = 1;
-        adr = 1;
-        wr = 0;
-        #PERIOD;
-
-        A = 0;
-        v[2:1] = 2'b11;
-        adr = 3;
-        wr = 0;
-        #PERIOD;
-
-        S = 4'b1001;
-        M = 1;
-        Pin = 1;
-        adr = 1;
-        wr = 1;
-        #PERIOD;
-*/
+        
         $finish;
     end
 
 endmodule
+

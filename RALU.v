@@ -7,15 +7,16 @@ module RALU(
     input        reset,
     
     input  [3:0] DataIn,
+
     input  [3:0] S,
     input        M,
     input        Pin,
-    input        A,
-    input  [3:0] v,
-    input        wr,
-    input  [2:0] adr,
     input        ISR,
     input        ISL,
+    input        A,
+    input        wr,
+    input  [2:0] adr,
+    input  [3:0] v,
 
     output   reg OSR,
     output   reg OSL,
@@ -26,7 +27,7 @@ module RALU(
     reg [3:0] regA;
     reg [3:0] regB;
     wire [3:0] P;
-    reg [7:0] GPRB [3:0];
+    reg [3:0] GPRB [0:7];
 
     parallel_ALU ALU(
         .A        (regA),
@@ -39,15 +40,14 @@ module RALU(
     );
 
     // Register A
-    always @(posedge clock or posedge reset) begin
+    always @(posedge clock or posedge reset)
         if (reset)
             regA <= 0;
         else if (v[0])
             regA <= A ? DataIn : GPRB[adr];
-    end
 
     // Register B
-    always @(posedge clock or posedge reset) begin
+    always @(posedge clock or posedge reset)
         if (reset)
             regB <= 0;
         else case (v[2:1])
@@ -55,26 +55,23 @@ module RALU(
                 ;
 
             2'b01:
-                {OSL, regB} = {regB, ISL};
+                {OSL, regB} <= {regB, ISL};
 
             2'b10:
-                {regB, OSR} = {ISR, regB};
+                {regB, OSR} <= {ISR, regB};
 
             2'b11:
                 regB <= GPRB[adr];
         endcase
-    end
     
     // General Purpose Register Block
     integer i;
-    always @(posedge clock or posedge reset) begin
-        if (reset) begin
+    always @(posedge clock or posedge reset)
+        if (reset)
             for (i = 0; i < 8; i = i + 1)
-                GPRB[i] = 4'b0000;
-        end
+                GPRB[i] <= 4'b0000;
         else
-            GPRB[adr] = wr ? DataIn : GPRB[adr];
-    end
+            GPRB[adr] <= wr ? R : GPRB[adr];
 
 endmodule
 
