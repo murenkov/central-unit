@@ -8,13 +8,13 @@ module ControlUnit(
     output [16:0] control_bus
 );
 
-    reg [19:0] ROM [0:255];
-    initial $readmemb("commands.bin", ROM);
+    reg [19:0] ROM [0:127];
+    initial $readmemb("commands_2.bin", ROM);
     reg [6:0] program_counter = 0;
     wire [19:0] command;
 
     assign command = ROM[program_counter];
-    assign control_bus = command[16:0];
+    assign control_bus = (command[19:17] != 0) ? 17'b0 : command[16:0];
 
     always @(posedge clock or posedge reset)
         if (reset)

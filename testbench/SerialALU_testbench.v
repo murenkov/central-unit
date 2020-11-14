@@ -1,10 +1,10 @@
 /*
-* Testbench for serial_ALU.v
+* Testbench for serial_ALU
 */
 
 `timescale 1us/1ns
 
-module serial_ALU_testbench();
+module SerialALU_testbench();
 
     reg [3:0] A, B;
     reg [3:0] S;
@@ -16,7 +16,7 @@ module serial_ALU_testbench();
 
     localparam PERIOD = 1;
 
-    serial_ALU UUT(
+    SerialALU UUT(
         .A    (A),
         .B    (B),
         .S    (S),
@@ -27,8 +27,8 @@ module serial_ALU_testbench();
     );
 
     initial begin
-        $dumpfile("./serial_ALU.vcd");
-        $dumpvars(0, serial_ALU_testbench);
+        $dumpfile("./SerialALU.vcd");
+        $dumpvars(0, SerialALU_testbench);
 
         A = 0;
         B = 8;

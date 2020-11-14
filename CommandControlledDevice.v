@@ -44,7 +44,7 @@ module CommandControlledDevice(
     assign port_id = control_bus[6:4];
 
     always @(posedge clock or posedge reset)
-        if (!reset) begin
+        if (reset) begin
             carry_flag <= 0;
             zero_flag <= 0;
         end

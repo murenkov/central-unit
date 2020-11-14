@@ -4,7 +4,7 @@
 
 `timescale 1us/1ns
 
-module parallel_ALU_testbench();
+module ParallelALU_testbench();
 
     reg [3:0] A, B;
     reg [3:0] S;
@@ -16,7 +16,7 @@ module parallel_ALU_testbench();
 
     localparam PERIOD = 1;
 
-    parallel_ALU UUT(
+    ParallelALU UUT(
         .A    (A),
         .B    (B),
         .S    (S),
@@ -27,8 +27,8 @@ module parallel_ALU_testbench();
     );
 
     initial begin
-        $dumpfile("./parallel_ALU.vcd");
-        $dumpvars(0, parallel_ALU_testbench);
+        $dumpfile("./ParallelALU.vcd");
+        $dumpvars(0, ParallelALU_testbench);
 
         A = 0;
         B = 8;

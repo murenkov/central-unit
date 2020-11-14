@@ -268,6 +268,9 @@ module RALU_testbench();
         adr = 0;
         v = 4'b0000;
         #PERIOD;
+        #PERIOD;
+        #PERIOD;
+        #PERIOD;
         
         $finish;
     end

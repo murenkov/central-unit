@@ -1,10 +1,10 @@
 /*
-* Testbench for adder.v
+* Testbench for Adder
 */
 
 `timescale 1us/1ns
 
-module adder_testbench();
+module Adder_testbench();
 
     reg a, b;
     reg [3:0] S;
@@ -16,7 +16,7 @@ module adder_testbench();
 
     localparam PERIOD = 1;
 
-    adder UUT(
+    Adder UUT(
         .a          (a),
         .b          (b),
         .S          (S),
@@ -29,35 +29,35 @@ module adder_testbench();
     );
 
     initial begin
-        $dumpfile("./adder.vcd");
-        $dumpvars(0, adder_testbench);
+        $dumpfile("./Adder.vcd");
+        $dumpvars(0, Adder_testbench);
 
         a = 0;
         b = 0;
         S = 4'b0110;
         M = 1;
-        Pin = 0;
+        Pin = 1;
         #PERIOD;
 
         a = 0;
         b = 1;
         S = 4'b0110;
         M = 1;
-        Pin = 0;
+        Pin = 1;
         #PERIOD;
 
         a = 1;
         b = 0;
         S = 4'b0110;
         M = 1;
-        Pin = 0;
+        Pin = 1;
         #PERIOD;
 
         a = 1;
         b = 1;
         S = 4'b0110;
         M = 1;
-        Pin = 0;
+        Pin = 1;
         #PERIOD;
 
         a = 0;
@@ -194,3 +194,4 @@ module adder_testbench();
     end
 
 endmodule
+

@@ -38,70 +38,132 @@ module CommandControlledDevice_testbench();
 
         clock = 0;
 
+        // 1st clock
+        // Reset
         reset = 1;
         data_in = 0;
         #PERIOD;
 
+        // 2nd clock
+        // Read C
+        reset = 0;
+        data_in = 1;
+        #PERIOD;
+
+        // 3rd clock
+        // Write C to GPRB[0]
+        reset = 0;
+        data_in = 1;
+        #PERIOD;
+
+        // 4th clock
+        // Read A
         reset = 0;
         data_in = 3;
         #PERIOD;
 
+        // 5th clock
+        // Write A to GPRB[1]
         reset = 0;
         data_in = 3;
         #PERIOD;
 
+        // 6th clock
+        // Read B
         reset = 0;
         data_in = 5;
         #PERIOD;
 
+        // 7th clock
+        // Write B to GPRB[2]
         reset = 0;
         data_in = 5;
         #PERIOD;
 
+        // 8th clock
+        // Send A from GPRB[1] to regB
         reset = 0;
         data_in = 0;
         #PERIOD;
 
+        // 9th clock
+        // Get sum of A and B and write result to GPRB[2]
+        #PERIOD;
+        
+        // 10th clock
+        // Shift to left data in regB
+        #PERIOD;
+        
+        // 11th clock
+        // Shift to left data in regB
+        #PERIOD;
+        
+        // 12th clock
+        // Shift to left data in regB and send GPRB[2] in regA
+        #PERIOD;
+        
+        // 13th clock
+        // Bitwise and of data from registers A and B then send to GPRB[1]
+        #PERIOD;
+        
+        // 14th clock
+        // Send data from GPRB[0] to regB
+        #PERIOD;
+        
+        // 15th clock
+        // Send data from GPRB[1] to regA
+        #PERIOD;
+        
+        // 16th clock
+        // regA (R) - regB (C) 
+        #PERIOD;
+        
+        // 17th clock
+        // If (cond) goto 1
+        #PERIOD;
+        
+        // 18th clock
+        reset = 0;
+        data_in = 15;
+        #PERIOD;
+
+        // 19th clock
+        reset = 0;
+        data_in = 15;
+        #PERIOD;
+
+        // 20th clock
+        reset = 0;
+        data_in = 14;
+        #PERIOD;
+
+        // 21th clock
+        reset = 0;
+        data_in = 14;
+        #PERIOD;
+
+        // 22th clock
+        reset = 0;
+        data_in = 13;
+        #PERIOD;
+
+        // 23th clock
+        reset = 0;
+        data_in = 13;
+        #PERIOD;
+
+        // 23th clock
         reset = 0;
         data_in = 0;
         #PERIOD;
-
-        reset = 0;
-        data_in = 0;
         #PERIOD;
-
-        reset = 0;
-        data_in = 0;
         #PERIOD;
-
-        reset = 0;
-        data_in = 0;
         #PERIOD;
-
-        reset = 0;
-        data_in = 0;
         #PERIOD;
-
-        reset = 0;
-        data_in = 0;
         #PERIOD;
-
-        reset = 0;
-        data_in = 0;
         #PERIOD;
-
-        reset = 0;
-        data_in = 0;
         #PERIOD;
-
-        reset = 0;
-        data_in = 0;
-        #PERIOD;
-
-        reset = 0;
-        data_in = 0;
-        #PERIOD;
-
+        
         $finish;
     end
 
