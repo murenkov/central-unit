@@ -12,6 +12,7 @@ module CommandControlledDevice(
 );
 
     wire [16:0] control_bus;
+    wire Pout;
     reg carry_flag, zero_flag;
 
     RALU RALU(
