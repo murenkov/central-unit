@@ -9,7 +9,9 @@ module ControlUnit(
 );
 
     reg [19:0] ROM [0:127];
-    initial $readmemb("commands_2.bin", ROM);
+    // initial $readmemb("commands_1.bin", ROM);
+    // initial $readmemb("commands_2.bin", ROM);
+    initial $readmemb("commands_3.bin", ROM);
     reg [6:0] program_counter = 0;
     wire [19:0] command;
 
