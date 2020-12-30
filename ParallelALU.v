@@ -21,50 +21,33 @@ module ParallelALU(
         .P (P)
     );
 
-    Adder Adder0(
-        .a    (A[0]),
-        .b    (B[0]),
-        .S    (S),
-        .M    (M),
-        .Pin  (Pin),
-        .D    (D[0]),
-        .F    (F[0]),
-        .R    (R[0])
-    );
+    genvar i;
+    generate
+        Adder Adder0(
+            .a    (A[0]),
+            .b    (B[0]),
+            .S    (S),
+            .M    (M),
+            .Pin  (Pin),
+            .D    (D[0]),
+            .F    (F[0]),
+            .R    (R[0])
+        );
 
-    Adder Adder1(
-        .a    (A[1]),
-        .b    (B[1]),
-        .S    (S),
-        .M    (M),
-        .Pin  (P[0]),
-        .D    (D[1]),
-        .F    (F[1]),
-        .R    (R[1])
-    );
+        for (i = 1; i < 4; i = i + 1) begin : Adder1
+            Adder Adder(
+                .a    (A[i]),
+                .b    (B[i]),
+                .S    (S),
+                .M    (M),
+                .Pin  (P[i-1]),
+                .D    (D[i]),
+                .F    (F[i]),
+                .R    (R[i])
+            );
+        end
+    endgenerate
 
-    Adder Adder2(
-        .a    (A[2]),
-        .b    (B[2]),
-        .S    (S),
-        .M    (M),
-        .Pin  (P[1]),
-        .D    (D[2]),
-        .F    (F[2]),
-        .R    (R[2])
-    );
-
-    Adder Adder3(
-        .a    (A[3]),
-        .b    (B[3]),
-        .S    (S),
-        .M    (M),
-        .Pin  (P[2]),
-        .D    (D[3]),
-        .F    (F[3]),
-        .R    (R[3])
-    );
-    
     assign Pout = P[3];
 
 endmodule

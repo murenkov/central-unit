@@ -58,103 +58,17 @@ module InputModule(
         .valid_data (key_pressed)
     );
 
-    FrequencyDivider FreqDiv0(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**1),
-        .clock_out (frequency[0])
-    );
-
-    FrequencyDivider FreqDiv1(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**2),
-        .clock_out (frequency[1])
-    );
-
-    FrequencyDivider FreqDiv2(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**3),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv3(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**4),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv4(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**5),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv5(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**6),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv6(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**7),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv7(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**8),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv8(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**9),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv9(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**10),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv10(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**11),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv11(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**12),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv12(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**13),
-        .clock_out (frequency[2])
-    );
-
-    FrequencyDivider FreqDiv31(
-        .clock_in  (clock),
-        .reset     (button0),
-        .divisor   (2**31),
-        .clock_out (frequency[2])
-    );
+    genvar i;
+    generate
+        for (i = 0; i < 32; i = i + 1) begin : FrequencyDivider0
+            FrequencyDivider FrequencyDivider(
+                .clock_in  (clock),
+                .reset     (button0),
+                .divisor   (2**(i+1)),
+                .clock_out (frequency[i])
+            );
+        end
+    endgenerate
 
 endmodule 
 

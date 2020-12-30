@@ -69,9 +69,8 @@ module RALU(
         if (reset)
             for (i = 0; i < 8; i = i + 1)
                 GPRB[i] <= 4'b0000;
-        else
-            if (wr)
-                GPRB[adr] <= R;
+        else if (wr)
+            GPRB[adr] <= R;
 
 endmodule
 
