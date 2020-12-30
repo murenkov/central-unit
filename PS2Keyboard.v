@@ -11,8 +11,8 @@ reg [3:0] count_bit;
 assign data = shift_reg[7:0];
 
 function parity_calc;
-    input [7:0] a;
-    parity_calc = ~(a[0] ^ a[1] ^ a[2] ^ a[3] ^ a[4] ^ a[5] ^ a[6] ^ a[7]);
+    input [7:0] data;
+    parity_calc = ~^data;
 endfunction
 
 reg [9:0] ps2_clock_detect;
